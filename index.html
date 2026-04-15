@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Aura Propiedades — Residencias y propiedades de prestigio seleccionadas con criterio."/>
+  <title>AURA — Propiedades de Prestigio</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-dot"></span>
+      AURA
+    </a>
+    <div class="nav-links">
+      <a href="#propiedades">Propiedades</a>
+      <a href="#contacto">Contacto</a>
+      <a href="admin/index.html" class="nav-admin">Panel Admin</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg-img"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-noise"></div>
+    <div class="hero-vlines"></div>
+
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-eyebrow-row">
+          <span class="eyebrow">Propiedades de Prestigio</span>
+        </div>
+        <h1 class="hero-title">
+          Encontrá
+          <span class="line-italic">tu lugar</span>
+          en el mundo
+        </h1>
+        <p class="hero-sub">Casas, departamentos y propiedades exclusivas seleccionadas con criterio. Servicio personalizado, experiencia sin igual.</p>
+        <div class="hero-cta">
+          <a href="#propiedades" class="btn btn-primary">Ver propiedades</a>
+          <a href="#contacto" class="btn btn-outline">Contactar asesor</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num" id="statTotal">—</div>
+            <div class="hero-stat-label">Propiedades activas</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" id="statVenta">—</div>
+            <div class="hero-stat-label">En venta</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num" id="statAlquiler">—</div>
+            <div class="hero-stat-label">En alquiler</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-cue">
+      <div class="hero-scroll-line"></div>
+      <span class="hero-scroll-label">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ─── MARQUEE ──────────────────────────────────── -->
+  <div class="marquee-strip">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>Casas de Lujo</span><span class="mdot">◆</span>
+      <span>Departamentos Premium</span><span class="mdot">◆</span>
+      <span>Propiedades en Venta</span><span class="mdot">◆</span>
+      <span>Alquileres Exclusivos</span><span class="mdot">◆</span>
+      <span>Terrenos Privilegiados</span><span class="mdot">◆</span>
+      <span>Nordelta · Palermo · Recoleta · Punta del Este</span><span class="mdot">◆</span>
+      <span>Casas de Lujo</span><span class="mdot">◆</span>
+      <span>Departamentos Premium</span><span class="mdot">◆</span>
+      <span>Propiedades en Venta</span><span class="mdot">◆</span>
+      <span>Alquileres Exclusivos</span><span class="mdot">◆</span>
+      <span>Terrenos Privilegiados</span><span class="mdot">◆</span>
+      <span>Nordelta · Palermo · Recoleta · Punta del Este</span><span class="mdot">◆</span>
+    </div>
+  </div>
+
+  <!-- ─── FILTERS + LISTING ────────────────────────── -->
+  <section class="filters-section" id="propiedades">
+    <div class="filters-inner">
+      <div class="filter-item">
+        <label>Operación</label>
+        <select id="filterOp">
+          <option value="">Todas</option>
+          <option value="venta">Venta</option>
+          <option value="alquiler">Alquiler</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label>Tipo</label>
+        <select id="filterType">
+          <option value="">Todos</option>
+          <option value="casa">Casa</option>
+          <option value="departamento">Departamento</option>
+          <option value="ph">PH</option>
+          <option value="terreno">Terreno</option>
+          <option value="local">Local / Oficina</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label>Ambientes</label>
+        <select id="filterRooms">
+          <option value="">Todos</option>
+          <option value="1">1 amb.</option>
+          <option value="2">2 amb.</option>
+          <option value="3">3 amb.</option>
+          <option value="4">4 o más</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label>Precio máx.</label>
+        <select id="filterPrice">
+          <option value="">Sin límite</option>
+          <option value="100000">USD 100K</option>
+          <option value="200000">USD 200K</option>
+          <option value="500000">USD 500K</option>
+          <option value="1000000">USD 1M</option>
+        </select>
+      </div>
+      <div class="filter-item" style="flex:1.4">
+        <label>Zona / Barrio</label>
+        <input type="text" id="filterZone" placeholder="ej: Palermo, Recoleta…"/>
+      </div>
+      <button class="filter-clear-btn" id="clearFilters">Limpiar</button>
+    </div>
+  </section>
+
+  <section class="properties-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title-lg">Propiedades</h2>
+        <p class="props-count" id="propsCount"><strong>—</strong> resultados</p>
+      </div>
+      <div class="properties-grid" id="propertiesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ──────────────────────────────────── -->
+  <section class="contact-section" id="contacto">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-left">
+          <p class="eyebrow contact-eyebrow">Contacto</p>
+          <h2 class="contact-title">¿Buscás algo<br/><em>específico?</em></h2>
+          <p class="contact-lead">Nuestro equipo de asesores especializados te acompaña en cada paso. Respondemos en menos de 24 horas.</p>
+          <div class="contact-links">
+            <a href="tel:+541112345678" class="contact-link">
+              <div class="clink-icon">✆</div>
+              +54 11 1234-5678
+            </a>
+            <a href="mailto:info@aura.com.ar" class="contact-link">
+              <div class="clink-icon">✉</div>
+              info@aura.com.ar
+            </a>
+            <a href="https://wa.me/5491112345678" target="_blank" class="contact-link">
+              <div class="clink-icon">◎</div>
+              WhatsApp directo
+            </a>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="form-row-2">
+            <div class="field-wrap">
+              <label>Nombre</label>
+              <input type="text" placeholder="Tu nombre" required/>
+            </div>
+            <div class="field-wrap">
+              <label>Email</label>
+              <input type="email" placeholder="tu@email.com" required/>
+            </div>
+          </div>
+          <div class="field-wrap">
+            <label>Teléfono <span style="opacity:.5;font-size:.85em">(opcional)</span></label>
+            <input type="tel" placeholder="+54 11 …"/>
+          </div>
+          <div class="field-wrap">
+            <label>Consulta</label>
+            <textarea rows="4" placeholder="Contanos qué estás buscando…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary" id="contactSubmit">Enviar consulta</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ───────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-brand-name">AURA</div>
+          <p>Propiedades de prestigio en Argentina y Uruguay seleccionadas con criterio.</p>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Propiedades</p>
+          <ul>
+            <li><a href="#propiedades">Casas en venta</a></li>
+            <li><a href="#propiedades">Departamentos</a></li>
+            <li><a href="#propiedades">En alquiler</a></li>
+            <li><a href="#propiedades">Destacadas</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <p class="footer-col-title">Empresa</p>
+          <ul>
+            <li><a href="#contacto">Quiénes somos</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="admin/index.html">Panel Admin</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2025 Aura Propiedades. Todos los derechos reservados.</p>
+        <div class="footer-socials">
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── MODAL ────────────────────────────────────── -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div class="toast-notification" id="toastEl"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
