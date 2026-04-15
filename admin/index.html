@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AURA — Panel de Administración</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body class="admin-body">
+
+  <div class="sidebar-mobile-overlay" id="sidebarOverlay"></div>
+
+  <!-- ─── SIDEBAR ──────────────────────────────────── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="nav-logo" style="font-size:17px">
+        <span class="nav-logo-dot"></span>AURA
+      </a>
+      <span class="sidebar-badge">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <span class="sidebar-section-label">Gestión</span>
+      <button class="sidebar-item active" data-view="list" id="sidebarList">
+        <span class="sidebar-icon">▦</span> Propiedades
+      </button>
+      <button class="sidebar-item" data-view="form" id="sidebarNew">
+        <span class="sidebar-icon">＋</span> Nueva propiedad
+      </button>
+      <div class="sidebar-divider"></div>
+      <span class="sidebar-section-label">Sitio</span>
+      <a href="../index.html" target="_blank" class="sidebar-item">
+        <span class="sidebar-icon">↗</span> Ver sitio web
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-stats-grid" id="sidebarStats">
+        <div class="sstat"><div class="sstat-num" id="st-total">—</div><div class="sstat-label">Total</div></div>
+        <div class="sstat"><div class="sstat-num" id="st-venta">—</div><div class="sstat-label">Venta</div></div>
+        <div class="sstat"><div class="sstat-num" id="st-alquiler">—</div><div class="sstat-label">Alquiler</div></div>
+        <div class="sstat"><div class="sstat-num" id="st-featured">—</div><div class="sstat-label">Destacadas</div></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ─── MAIN ─────────────────────────────────────── -->
+  <main class="admin-main" id="adminMain">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebarToggle">☰</button>
+        <h1 class="topbar-title" id="topbarTitle">Propiedades</h1>
+      </div>
+      <div class="topbar-right">
+        <a href="../index.html" target="_blank" class="back-link">← Ver sitio</a>
+        <button class="btn btn-primary" id="newPropBtn" style="padding:10px 24px">+ Nueva</button>
+      </div>
+    </div>
+
+    <!-- VIEW: LIST -->
+    <div class="view" id="viewList">
+      <div class="table-controls">
+        <input type="text" class="admin-search" id="adminSearch" placeholder="Buscar por nombre o zona…"/>
+        <select class="admin-select" id="adminFilterOp">
+          <option value="">Todas las operaciones</option>
+          <option value="venta">Solo venta</option>
+          <option value="alquiler">Solo alquiler</option>
+        </select>
+        <select class="admin-select" id="adminFilterType">
+          <option value="">Todos los tipos</option>
+          <option value="casa">Casas</option>
+          <option value="departamento">Departamentos</option>
+          <option value="ph">PH</option>
+          <option value="terreno">Terrenos</option>
+          <option value="local">Locales</option>
+        </select>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table" id="adminTable">
+          <thead>
+            <tr>
+              <th>Propiedad</th><th>Tipo</th><th>Operación</th><th>Zona</th><th>Precio</th><th>Dest.</th><th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody"></tbody>
+        </table>
+        <div class="table-empty" id="tableEmpty" style="display:none">No hay propiedades que coincidan con los filtros.</div>
+      </div>
+    </div>
+
+    <!-- VIEW: FORM -->
+    <div class="view" id="viewForm" style="display:none">
+      <div class="form-container">
+        <div class="form-header">
+          <h2 class="form-view-title" id="formViewTitle">Nueva Propiedad</h2>
+          <p class="form-view-sub">Completá los campos para publicar la propiedad en el sitio</p>
+        </div>
+        <form class="prop-form" id="propForm" novalidate autocomplete="off">
+          <input type="hidden" id="f-id"/>
+
+          <div class="form-section">
+            <div class="form-section-label">Información general</div>
+            <div class="form-grid">
+              <div class="field span-full">
+                <label>Título de la propiedad *</label>
+                <input type="text" id="f-title" placeholder="ej: Residencia Bosque Alto, Nordelta" required/>
+              </div>
+              <div class="field">
+                <label>Tipo *</label>
+                <select id="f-type" required>
+                  <option value="">Seleccionar…</option>
+                  <option value="casa">Casa</option>
+                  <option value="departamento">Departamento</option>
+                  <option value="ph">PH</option>
+                  <option value="terreno">Terreno</option>
+                  <option value="local">Local / Oficina</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>Operación *</label>
+                <select id="f-operation" required>
+                  <option value="">Seleccionar…</option>
+                  <option value="venta">Venta</option>
+                  <option value="alquiler">Alquiler</option>
+                </select>
+              </div>
+              <div class="field span-full">
+                <label>Zona / Barrio / Ciudad *</label>
+                <input type="text" id="f-zone" placeholder="ej: Palermo, CABA" required/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-label">Características</div>
+            <div class="form-grid">
+              <div class="field"><label>Ambientes</label><input type="number" id="f-rooms" min="1" max="30" placeholder="ej: 3"/></div>
+              <div class="field"><label>Baños</label><input type="number" id="f-bathrooms" min="1" max="20" placeholder="ej: 2"/></div>
+              <div class="field"><label>Superficie (m²)</label><input type="number" id="f-area" min="1" placeholder="ej: 120"/></div>
+              <div class="field"><label>Cocheras</label><input type="number" id="f-parking" min="0" max="10" placeholder="ej: 1"/></div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-label">Precio</div>
+            <div class="form-grid">
+              <div class="field">
+                <label>Moneda *</label>
+                <select id="f-currency"><option value="USD">USD — Dólares</option><option value="ARS">ARS — Pesos</option></select>
+              </div>
+              <div class="field">
+                <label>Precio *</label>
+                <input type="number" id="f-price" min="0" step="1000" placeholder="ej: 250000" required/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-label">Descripción e imagen</div>
+            <div class="form-grid">
+              <div class="field span-full">
+                <label>Descripción</label>
+                <textarea id="f-desc" rows="4" placeholder="Describí la propiedad con detalle…"></textarea>
+              </div>
+              <div class="field span-full">
+                <label>URL de imagen principal</label>
+                <input type="url" id="f-image" placeholder="https://images.unsplash.com/…"/>
+                <p class="field-hint">Recomendado: 1200×800px, JPG o WebP. Podés usar Unsplash o Cloudinary.</p>
+              </div>
+              <div class="img-preview-wrap" id="imgPreviewWrap">
+                <img id="imgPreview" src="" alt="Vista previa"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-label">Opciones de publicación</div>
+            <div class="toggle-row">
+              <label class="toggle-label-wrap">
+                <input type="checkbox" id="f-featured"/>
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                <span class="toggle-text">Marcar como propiedad destacada</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" id="cancelFormBtn">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="submitFormBtn">Publicar propiedad</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <div class="confirm-overlay" id="confirmOverlay" style="display:none">
+    <div class="confirm-box">
+      <div class="confirm-icon">⚠</div>
+      <p class="confirm-msg" id="confirmMsg">¿Confirmás esta acción?</p>
+      <div class="confirm-actions">
+        <button class="btn btn-ghost" id="confirmNo" style="padding:11px 22px">Cancelar</button>
+        <button class="btn-danger" id="confirmYes">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-notification" id="toastEl"></div>
+
+  <script src="../app.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
